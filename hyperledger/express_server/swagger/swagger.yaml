@@ -1,0 +1,184 @@
+swagger: '2.0'
+info:
+  description: "기부용  하이퍼레저 프로젝트"
+  version: 0.0.1
+  title: Hyperledger For Donating API Collections
+  contact:
+    email: lenon461@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    host: 'localhost:8989'
+basePath: /
+tags:
+  - name: query
+    description: test
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
+  - name: invoke
+    description: test
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
+schemes:
+  - http
+paths:
+  /channels:
+    get:
+      tags:
+        - query
+      summary: queryChannel
+      description: ''
+      operationId: test
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: success
+  /channels/donate:
+    put:
+      tags:
+        - invoke
+      summary: invokeDonate
+      description: ''
+      operationId: test2
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+              $ref: '#/definitions/donate'
+      responses:
+        '200':
+          description: success
+  /channels/create:
+    put:
+      tags:
+        - invoke
+      summary: invokCreate
+      description: ''
+      operationId: test2
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+              $ref: '#/definitions/create'
+      responses:
+        '200':
+          description: success
+  /channels/ledger:
+    get:
+      tags:
+        - query
+      summary: queryLedger
+      description: ''
+      operationId: test3
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: Userid
+        - in: query
+          name: channelname
+      responses:
+        '200':
+          description: success
+  /channels/block:
+    get:
+      tags:
+        - query 
+      summary: queryBlock
+      description: ''
+      operationId: test3
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: channelname
+      responses:
+        '200':
+          description: success
+  /user/login:
+      post:
+          tags:
+              - users
+          parameters:
+              - in: body
+                name: body
+                schema:
+                    $ref: '#/definitions/user'
+          responses:
+            '200':
+              description: success
+  /user/newUser:
+      post:
+          tags:
+              - users
+          parameters:
+              - in: body
+                name: body
+                schema:
+                    $ref: '#/definitions/user'
+securityDefinitions:
+  petstore_auth:
+    type: oauth2
+    authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
+    flow: implicit
+    scopes:
+      'write:pets': modify pets in your account
+      'read:pets': read your pets
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  channelname:
+      type: object
+      properties:
+          channelname:
+              type: string
+  create:
+      type: object
+      properties:
+          channelname:
+              type: string
+          id:
+              type: string
+          name:
+              type: string
+          money:
+              type: string
+  donate:
+      type: object
+      properties:
+          channelname:
+              type: string
+          id:
+              type: string
+          money:
+              type: string
+  user:
+      type: object
+      properties:
+          Userid:
+              type: string
+          Userpwd:
+              type: string
+
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'
